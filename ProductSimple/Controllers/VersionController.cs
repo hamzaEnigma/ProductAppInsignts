@@ -8,7 +8,7 @@ namespace ProductSimple.Controllers
     public class VersionController : ControllerBase
     {
         [HttpGet]
-        public async Task<IActionResult> Get() 
+        public IActionResult Get() 
         {
             var result = new
             {
