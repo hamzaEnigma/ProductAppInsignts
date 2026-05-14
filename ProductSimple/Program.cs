@@ -4,6 +4,11 @@ using ProductSimple.Repositories;
 using ProductSimple.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration
+    .GetValue<string>("APPLICATIONINSIGHTS_CONNECTION_STRING")
+    ?? builder.Configuration
+        .GetValue<string>("ApplicationInsights:ConnectionString");
+
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(opt =>
@@ -12,7 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
-//builder.Services.AddApplicationInsightsTelemetry(); // sera configuré via env var
+if (!string.IsNullOrEmpty(connectionString))
+{
+    builder.Services.AddApplicationInsightsTelemetry(options =>
+        options.ConnectionString = connectionString);
+}; // sera configuré via env var
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
