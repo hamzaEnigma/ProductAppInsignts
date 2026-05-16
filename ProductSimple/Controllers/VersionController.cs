@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductSimple.Infrastructure;
+using System.Reflection;
 
 namespace ProductSimple.Controllers
 {
@@ -10,9 +11,11 @@ namespace ProductSimple.Controllers
         [HttpGet]
         public IActionResult Get() 
         {
+            var assembly = Assembly.GetExecutingAssembly();
+
             var result = new
             {
-                Version = "1.0.0",
+                Version = assembly.GetName().Version,
                 BuiltAt = BuildInfo.builtAt,
                 Environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
             };
