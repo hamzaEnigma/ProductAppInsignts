@@ -1,4 +1,5 @@
 using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Abstractions;
 
@@ -18,13 +19,28 @@ namespace ProductSimple.Controllers
         }
 
         [HttpGet("/slowEnpoint")]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            Console.WriteLine("Starting the program...");
-            Thread.Sleep(4000);
-            Console.WriteLine("Returning after 4 secs...");
+            var rand = new Random();
+            var timeWaiting = rand.Next(3000, 6000);
 
-            return Ok();
+            var impactedUser = HttpContext.Request.Headers["X-User-Id"].FirstOrDefault() ?? "anonymous";
+
+            _telemetryClient.TrackEvent("slowEndpoint",
+                new Dictionary<string, string> {
+                    ["endpoint"] = "/slowEnpoint",
+                    ["impactedUser"] = impactedUser,
+                    ["tempsAttendu"] = timeWaiting.ToString()
+                });
+
+            await Task.Delay(timeWaiting);
+
+            return StatusCode(200, new Dictionary<string, string>
+            {
+                ["endpoint"] = "/slowEnpoint",
+                ["impactedUser"] = impactedUser,
+                ["tempsAttendu"] = timeWaiting.ToString()
+            });
         }
 
         [HttpGet("/sqlException")]
