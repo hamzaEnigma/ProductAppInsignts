@@ -18,7 +18,7 @@ namespace ProductSimple.Controllers
             _telemetryClient = telemetryClient;
         }
 
-        [HttpGet("/slowEnpoint")]
+        [HttpGet("slowEnpoint")]
         public async Task<IActionResult> Get()
         {
             var rand = new Random();
@@ -43,7 +43,7 @@ namespace ProductSimple.Controllers
             });
         }
 
-        [HttpGet("/sqlException")]
+        [HttpGet("sqlException")]
         public IActionResult GetBackendError()
         {
             try
