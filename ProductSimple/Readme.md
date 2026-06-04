@@ -44,8 +44,11 @@ Configuration is managed through:
 - Health checks
 
 ## Deployment using KUDO inside azure portal
-	## Build + Publish : delete the file if exists before this command
-	dotnet publish ProductSimple.csproj --configuration Release --output ./publish
+	## Build + Publish : 
+	## delete the file if exists before this command
+	 Remove-Item -Path "./publish" -Recurse -Force 
+	 dotnet publish ProductSimple.csproj --configuration Release --output ./publish
 	## zip published code
+	Remove-Item -Path "./app.zip" -Force 
 	Compress-Archive -Path ./publish/* -DestinationPath ./app.zip -Force
 

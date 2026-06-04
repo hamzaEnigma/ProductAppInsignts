@@ -1,12 +1,10 @@
 # App insights requests
+## ------- START    ------- 
 
-## liste des requetes les plus courtes
+## liste des requetes KQL génériques
+## liste des API erronés
 
-requests
-| where timestamp between (ago(1h) .. now())
-| where duration > 2000
-| order by duration
-|project timestamp, name,url, resultCode, duration 
-
-
+requests 
+| where resultCode startswith("4") or    resultCode startswith "5"
+| where timestamp  > ago(1d)
 
