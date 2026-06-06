@@ -22,7 +22,7 @@ namespace ProductSimple.Controllers
         public async Task<IActionResult> Get()
         {
             var rand = new Random();
-            var timeWaiting = rand.Next(3000, 6000);
+            var timeWaiting = rand.Next(1000, 3000);
 
             var impactedUser = HttpContext.Request.Headers["X-User-Id"].FirstOrDefault() ?? "anonymous";
 
