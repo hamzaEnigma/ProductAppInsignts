@@ -31,7 +31,7 @@ requests
     nb_success = countif(success == true),
     nb_faillures = countif(success == false)
   by name, url
-| extend taux_erreur = nb_faillures *100 / nb_success
+| extend taux_erreur = nb_faillures *100 / nombre_appels
 | order by moyenne_duration desc 
 
 ## 3)  Impact utilisateurs : combien impactés par la lenteur 
