@@ -28,5 +28,11 @@ namespace ProductSimple.Services
 
         private static ProductResponseDto ToDto(Product p) =>
             new(p.Id, p.Name, p.Price, p.Description, p.CreatedAt);
+
+        public ProductResponseDto GetDefaultProduct()
+        {
+            var product = new Product { Name = "dto.Name", Description = "dto.Description" };
+            return ToDto(product);
+        }
     }
 }

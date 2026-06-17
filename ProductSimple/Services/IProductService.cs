@@ -7,5 +7,6 @@ namespace ProductSimple.Services
         Task<IEnumerable<ProductResponseDto>> GetAllAsync();
         Task<ProductResponseDto?> GetByIdAsync(int id);
         Task<ProductResponseDto> CreateAsync(CreateProductDto dto);
+        ProductResponseDto GetDefaultProduct();
     }
 }
