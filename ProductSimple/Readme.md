@@ -8,7 +8,7 @@ REST API for automobile insurance quotation.
 
 - .NET 8
 - Azure Application Insights
-
+- Azure fonctions
 
 ## Architecture
 
@@ -18,10 +18,12 @@ Description of services and dependencies.
 
 ### Prerequisites
 
-- .NET 9 SDK
-- Docker
-- SQL Server
-
+- .NET 8 SDK
+ 
+## Setup local
+1. Copier appsettings.Development.json.example
+2. Renommer en appsettings.Development.json
+3. Remplacer YOUR_CONNECTION_STRING_HERE par ta vraie valeur
 ### Run locally
 
 ```bash

@@ -1,0 +1,14 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ApplicationInsights": {
+    "ConnectionString": "YOUR_CONNECTION_STRING_HERE"
+  },
+  "AzureFunction": {
+    "AzFunctionExportProduct": "http://localhost:7071/api/ExportProductFunction"
+  }
+}
