@@ -1,11 +1,14 @@
 # azure function md
 
 
-## to deployer � azure fonction, 
+## to deployer  azure fonction, 
 ## il faut passer par azure cli, et s'authentifier d'abord
 	az login
 
-## t�lechargez la bib func puis lancer le d�ploiement
+## si az login ne marche pas avec git bash 
+	az login --use-device-code --tenant "PUT TENANT HERE"
+
+## telechargez la bib func puis lancer le d�ploiement
 ## vu qu'on passe par le "consommation flexible" plan on a que ce moyen pour d�ployer la ressource
 	cd func-myapi-prod
 	func azure functionapp publish func-myapi-prod

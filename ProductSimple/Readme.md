@@ -16,14 +16,19 @@ Description of services and dependencies.
 
 ## Getting Started
 
-### Prerequisites
+## Prerequisites
 
 - .NET 8 SDK
- 
+- Azure CLI (`winget install Microsoft.AzureCLI`)
+- Azure Functions Core Tools v4 (`npm install -g azure-functions-core-tools@4`)
+- Git
+- 
 ## Setup local
+
 1. Copier appsettings.Development.json.example
 2. Renommer en appsettings.Development.json
 3. Remplacer YOUR_CONNECTION_STRING_HERE par ta vraie valeur
+1. 
 ### Run locally
 
 ```bash

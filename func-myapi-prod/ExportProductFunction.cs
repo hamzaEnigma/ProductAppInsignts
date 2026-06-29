@@ -1,3 +1,4 @@
+using Azure.Storage.Blobs;
 using func_myapi_prod.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -34,6 +35,21 @@ namespace func_myapi_prod
                 status = "Success",
                 documentReference = $"DOC-{DateTime.UtcNow:yyyy}-{product.Id:D4}"
             };
+
+            // upload vers Blob storage
+            var connectionString = Environment.GetEnvironmentVariable("ExportStorageConnection");
+            var blobServiceClient = new BlobServiceClient(connectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient("exports");
+            await containerClient.CreateIfNotExistsAsync();
+
+            var blobName = $"{doc.documentReference}.json";
+            var blobClient = containerClient.GetBlobClient(blobName);
+            var docJson = JsonSerializer.Serialize(doc);
+
+            await blobClient.UploadAsync(new BinaryData(docJson), overwrite: true);
+
+            _logger.LogInformation("Document {BlobName} uploaded to Blob Storage", blobName);
+
             return new OkObjectResult(doc);
         }
     }
